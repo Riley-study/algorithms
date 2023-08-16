@@ -2,10 +2,18 @@ from random import randint
 import time
 
 # Обязательное ДЗ - Реализовать алгоритм пирамидальной сортировки (сортировка кучей).
-arr_length = 10
+
+
+def work_time(func, x):
+    start = time.time()
+    func(x)
+    print(time.time() - start)
+
+
+arr_length = 50
 init_array = [i for i in range(0, arr_length)]
 for i in range(0, arr_length):
-    init_array[i] = randint(0, 100)
+    init_array[i] = randint(-100, 100)
 
 print(*init_array)
 
@@ -24,14 +32,20 @@ def heapyfi(array, n, index):
         heapyfi(array, n, largest)
 
 
-def heapSort(array):
+def heap_sort(array):
     n = len(array)
+    k = 0
     for i in range(n // 2 - 1, -1, -1):
         heapyfi(array, n, i)
+        k += 1
 
     for i in range(n-1, 0, -1):
         array[0], array[i] = array[i], array[0]
         heapyfi(array, i, 0)
+        k += 1
+    print(k)
 
-heapSort(init_array)
+
+work_time(heap_sort, init_array)
+# heap_sort(init_array)
 print(init_array)
